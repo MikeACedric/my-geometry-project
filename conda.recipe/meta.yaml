@@ -1,0 +1,29 @@
+# conda.recipe/meta.yaml
+
+package:
+  name: my-geometry-package
+  version: "0.0.1"
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  number: 0
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+
+about:
+  home: "https://github.com/yourusername/my-geometry-package"
+  license: MIT
+  summary: "A simple package to calculate geometric shapes area."
+  description: "This is a simple package for calculating the area of circles and squares."
+
+extra:
+  recipe-maintainers:
+    - MikeACedric

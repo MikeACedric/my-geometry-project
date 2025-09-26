@@ -1,0 +1,31 @@
+name: Conda Package Publisher
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers the workflow on any new tag starting with 'v'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          miniconda-version: "latest"
+          channels: conda-forge,defaults
+
+      - name: Build and upload conda package
+        env:
+          ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+        run: |
+          # Install the necessary tools for building and uploading
+          conda install -y conda-build anaconda-client
+
+          # Build the package from your recipe
+          conda build --output-folder . .
+          anaconda upload --token  $ANACONDA_TOKEN *.conda

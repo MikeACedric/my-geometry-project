@@ -25,7 +25,6 @@ jobs:
         run: |
           # Install the necessary tools for building and uploading
           conda install -y conda-build anaconda-client
-
           # Build the package from your recipe
           conda build --output-folder . .
-          anaconda upload --token  $ANACONDA_TOKEN *.conda
+          anaconda upload --verbose --token $ANACONDA_TOKEN *.conda
